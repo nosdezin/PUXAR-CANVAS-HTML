@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto Prototipo</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        outline: none;
+      }
+      #object-pull-1 {
+        width: 13%;
+        background-color: red;
+        padding: 10px 20px;
+        margin: 10px;
+        cursor: pointer;
+      }
+      #object-pull-2 {
+        width: 13%;
+        background-color: cyan;
+        padding: 10px 20px;
+        margin: 10px;
+        cursor: pointer;
+      }
+      canvas {
+        border: 1px solid black;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas width="300" height="300"></canvas>
+    <div id="object-pull-1" draggable="true">
+      <span>Puxe para a area</span>
+    </div>
+    <div id="object-pull-2" draggable="true">
+      <span>Puxe para a area</span>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
