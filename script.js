@@ -10,58 +10,35 @@ let Coords = [
 let drag_bool_1 = false;
 let drag_bool_2 = false;
 
-dragobject1.addEventListener("dragstart", () => {
-  drag_bool_1 = true;
-});
-
-dragobject1.addEventListener("dragend", () => {
-  drag_bool_1 = false;
-});
-
-dragobject2.addEventListener("dragend", () => {
-  drag_bool_2 = false;
-});
-
-dragobject2.addEventListener("dragstart", () => {
-  drag_bool_2 = true;
-});
+dragobject1.ondragstart = () => drag_bool_1 = true
+dragobject2.ondragstart = () => drag_bool_2 = true
+dragobject1.ondragend = () => drag_bool_1 = false
+dragobject2.ondragend = () => drag_bool_2 = false
 
 canvas.addEventListener("dragover", (e) => {
   var bounding = canvas.getBoundingClientRect();
   var x = e.clientX - bounding.left;
   var y = e.clientY - bounding.top;
-  if (drag_bool_1) {
-    ctx.clearRect(0, 0, 300, 300);
-    ctx.fillStyle = "rgb(255,0,0)";
-    ctx.fillRect(x, y, 100, 30);
-    ctx.font = "15px monospace";
-    ctx.fillStyle = "rgb(0,0,0)";
-    ctx.fillText("Area puxada", x + 5, y + 20);
-    Coords[0].x = x;
-    Coords[0].y = y;
-    if (Coords[1].x != 0 && Coords[1].y != 0) {
-      ctx.fillStyle = "rgb(0,100,100)";
-      ctx.fillRect(Coords[1].x, Coords[1].y, 100, 30);
-      ctx.font = "15px monospace";
-      ctx.fillStyle = "rgb(0,0,0)";
-      ctx.fillText("Area puxada", Coords[1].x + 5, Coords[1].y + 20);
-    }
-  }
-  if (drag_bool_2) {
-    ctx.clearRect(0, 0, 300, 300);
-    ctx.fillStyle = "rgb(0,100,100)";
-    ctx.fillRect(x, y, 100, 30);
-    ctx.font = "15px monospace";
-    ctx.fillStyle = "rgb(0,0,0)";
-    ctx.fillText("Area puxada", x + 5, y + 20);
-    Coords[1].x = x;
-    Coords[1].y = y;
-    if (Coords[0].x != 0 && Coords[0].y != 0) {
-      ctx.fillStyle = "rgb(255,0,0)";
-      ctx.fillRect(Coords[0].x, Coords[0].y, 100, 30);
-      ctx.font = "15px monospace";
-      ctx.fillStyle = "rgb(0,0,0)";
-      ctx.fillText("Area puxada", Coords[0].x + 5, Coords[0].y + 20);
-    }
-  }
+  ctx.clearRect(0, 0, 300, 300);
+  PullObjects(drag_bool_1,"rgb(255,0,0)","rgb(0,100,100)",0,1,x,y)
+  PullObjects(drag_bool_2,"rgb(0,100,100)","rgb(255,0,0)",1,0,x,y)
 });
+
+function PullObjects(condicao,quadradoColorself,quadradoColorOther,idself,idother,x,y){
+  if (condicao) {
+    ctx.fillStyle = quadradoColorself;
+    ctx.fillRect(x, y, 100, 30);
+    ctx.font = "15px monospace";
+    ctx.fillStyle = "rgb(0,0,0)";
+    ctx.fillText("Area puxada", x + 5, y + 20);
+    Coords[idself].x = x;
+    Coords[idself].y = y;
+    if (Coords[idother].x != 0 && Coords[idother].y != 0) {
+      ctx.fillStyle = quadradoColorOther;
+      ctx.fillRect(Coords[idother].x, Coords[idother].y, 100, 30);
+      ctx.font = "15px monospace";
+      ctx.fillStyle = "rgb(0,0,0)";
+      ctx.fillText("Area puxada", Coords[idother].x + 5, Coords[idother].y + 20);
+    }
+  }
+}
